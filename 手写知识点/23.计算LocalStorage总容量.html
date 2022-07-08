@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>计算LocalStorage总容量</title>
+  </head>
+  <body>
+    <script>
+      let str = "0123456789";
+      let temp = "";
+      while (str.length !== 10240) {
+        str = str + "0123456789";
+      }
+      localStorage.clear(); //先清空本地缓存
+      const computedTotal = () => {
+        return new Promise((resolve) => {
+          const timer = setInterval(() => {
+            try {
+              localStorage.setItem("temp", temp);
+            } catch (error) {
+              //报错说明超出最大存储
+              resolve(temp.length / 1024 - 10);
+              clearInterval(timer);
+              localStorage.clear();
+            }
+            temp = temp + str;
+          }, 0);
+        });
+      };
+      //   (async () => {
+      //     const total = await computedTotal();
+      //     console.log(`最大容量${total}KB`);
+      //   })();
+    </script>
+  </body>
+</html>

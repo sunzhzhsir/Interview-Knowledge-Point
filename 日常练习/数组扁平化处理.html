@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //将数组扁平化并去除其中重复数据
+      //最终得到一个升序且不重复的数组
+      var arr = [
+        [1, 2, 2],
+        [3, 4, 5, 5],
+        [6, 7, 8, 9, [11, 12, [12, 12, [13]]]],
+        10,
+      ];
+      console.log("111111", arr.toString());
+      const flat = function (arr) {
+        let arry = Array.from(new Set(arr.toString().split(",")));
+        arry = arry.sort((a, b) => a - b);
+        console.log(arry);
+        return arry;
+      };
+      flat(arr);
+      var arr = [
+        [1, 2, 2],
+        [3, 4, 5, 5],
+        [6, 7, 8, 9, [11, 12, 12, 12, 13]],
+        10,
+      ];
+      //递归
+      Array.prototype.flat = function () {
+        const result = this.map((item) => {
+          if (Array.isArray(item)) {
+            return item.flat();
+          }
+          return item;
+        });
+        console.log("22222", result, [].concat(...result));
+        return [].concat(...result);
+      };
+      console.log("123",[].concat(...arr));
+      console.log(arr.flat());
+      // var arr = [
+      //   [1, 2, 2],
+      //   [3, 4, 5, 5],
+      //   [6, 7, 8, 9, [11, 12, [12, 12, [13]]]],
+      //   10,
+      // ];
+      // //使用while
+      // Array.prototype.flat2 = function () {
+      //   let result = this;
+      //   while (result.some((item) => Array.isArray(item))) {
+      //     result = [].concat(...result);
+      //   }
+      //   return result;
+      // };
+      // console.log(arr.flat2());
+    </script>
+  </body>
+</html>

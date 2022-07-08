@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div>正则测试</div>
+    <script>
+      const name = "顶顶顶zz啊add数是啊";
+      const nameReg = new RegExp("[a-z]|[A-Z]");
+      const test = new RegExp("投资|借|股|债|券");
+      const desc = "手动投杀杀杀投资资阀手动阀阿股斯顿股";
+      console.log("asdasdasdasd", nameReg.test(name));
+      console.log("asdasdasdasd", test.test(desc));
+    </script>
+  </body>
+</html>

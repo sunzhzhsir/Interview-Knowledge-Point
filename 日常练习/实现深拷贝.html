@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>实现深拷贝</title>
+  </head>
+  <body>
+    <script>
+      let oldOject = {
+        name: "小明",
+        age: 18,
+        test: ["1", "2", "3"],
+        qwe: {
+          a: "a",
+          b: "b",
+        },
+      };
+      //第一种
+      let new1 = {};
+      new1 = JSON.parse(JSON.stringify(oldOject));
+      //   oldOject.name = "小红";
+      console.log(new1);
+      //第二种，深拷贝
+      let new2 = {};
+      function copy(newObject, oldOject) {
+        for (let key in oldOject) {
+          let item = oldOject[key];
+          if (item instanceof Array) {
+            newObject[key] = copy([], item);
+          } else if (item instanceof Object) {
+            newObject[key] = copy({}, item);
+          } else {
+            newObject[key] = item;
+          }
+        }
+        return newObject;
+      }
+      new2 = copy(new2, oldOject);
+      oldOject.name = "小红";
+      console.log(new2);
+      console.log(oldOject);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>16.计算对象的层次</title>
+  </head>
+  <body>
+    <script>
+      const loopGetevel = (obj) => {
+        let num = 1;
+        const computed = (obj, level) => {
+          level = level || 0;
+          if (typeof obj === "object" && obj !== null) {
+            Object.values(obj).forEach((v) => {
+              console.log(v);
+              if (typeof v === "object" && v != null) {
+                computed(v, level + 1);
+              } else {
+                num = level + 1 > num ? level + 1 : num;
+              }
+            });
+          } else {
+            num = level > num ? level : num;
+          }
+        };
+        computed(obj);
+        return num;
+      };
+      const obj = {
+        name: "tom",
+        school: {
+          old: "xian",
+        },
+        work: {
+          now: "yanta",
+        },
+      };
+      console.log(loopGetevel(obj));
+    </script>
+  </body>
+</html>

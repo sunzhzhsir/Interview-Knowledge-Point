@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="wrap clearfix">
+      <div class="left">left，宽度固定，高度可固定也可以由内容撑开。</div>
+      <div class="right">right，宽度固定，高度可固定也可以由内容撑开。</div>
+      <div class="center">
+        center，可以自适应浏览器宽度，高度可固定也可以由内容撑开。
+      </div>
+    </div>
+  </body>
+  <script>
+    console.log(true + 1); //2
+    console.log("asdasd" + true); //asdasdtrue
+    console.log(undefined + true); //NaN
+    console.log(undefined + 1); //NaN
+    console.log(typeof null); //object
+    console.log(typeof NaN); //number
+    console.log(typeof undefined); //undefined
+    console.log("" == null); //false
+    var a;
+    console.log(typeof a); //undefined
+    if (a) {
+      console.log("aaaa");
+    } else {
+      console.log("bbbb"); //被输出
+    }
+    var b = null;
+    console.log(typeof b); //object
+    if (b) {
+      console.log("ccccc");
+    } else {
+      console.log("ddddd"); //被输出
+    }
+
+    var a = {
+      user: "追梦子",
+      fn: function () {
+        console.log(this.user);
+      },
+    };
+    var b = a.fn;
+    var c = b.bind(a);
+    console.log(c); //function() { [native code] }
+    c(); //追梦子
+
+    let asd = "";
+    console.log("asdasdasd", asd == false);
+
+    var arr = [3, 2, 4];
+    var twoSum = function (nums, target) {
+      // let hash = {};
+      // for (let i = 0; i < nums.length; i++) {
+      //   if (hash[target - nums[i]] !== undefined) {
+      //     return [i, hash[target - nums[i]]];
+      //   }
+      //   hash[nums[i]] = i;
+      // }
+      // return [];
+      for (let i = 0; i < nums.length; i++) {
+        let test = target - nums[i];
+        let index = nums.indexOf(test);
+        if (index > -1 && i != index) {
+          return [i, index];
+        }
+      }
+    };
+    console.log("twoSum", twoSum(arr, 6));
+    // 输入：l1 = [2,4,3], l2 = [5,6,4]
+    // 输出：[7,0,8]
+    // 解释：342 + 465 = 807.
+    let l1 = [20, 4, 3],
+      l2 = [5, 6, 4];
+    var addTwoNumbers = function (l1, l2) {
+      // l1 = l1.reverse();
+      // l2 = l2.reverse();
+      // l1 = parseInt(l1.join(""));
+      // l2 = parseInt(l2.join(""));
+      // const sum = l1 + l2;
+      // const converToArray = (number) =>
+      //   [...`${number}`].map((el) => parseInt(el));
+      // const a = converToArray(sum);
+      // return a.reverse();
+      var arr1 = [];
+      while (l1.length > 0) {
+        arr1.push(l1.pop());
+      }
+      var arr2 = [];
+      while (l2.length > 0) {
+        arr2.push(l2.pop());
+      }
+      const a = parseInt(arr1.join(""));
+      const b = parseInt(arr2.join(""));
+      const sum = a + b;
+      const converToArray = (number) =>
+        [...`${number}`].map((el) => parseInt(el));
+      const c = converToArray(sum);
+      return c.reverse();
+    };
+    console.log("addTwoNumbers", addTwoNumbers(l1, l2));
+
+    var arr = [];
+    var num = 12345;
+    while (num) {
+      arr.unshift(num % 10);
+      num = parseInt(num / 10);
+    }
+    console.log("rtyrtyrty", arr);
+    num = 567;
+    console.log("sddgdfgdfg", [...`${num}`]); //拆分数字，将数字变成数组（元素为字符串类型）
+  </script>
+  <style>
+    .wrap {
+      background-color: #d66464;
+    }
+    .clearfix:after {
+      content: "";
+      clear: both;
+      display: block;
+    }
+    .left {
+      float: left;
+      width: 100px;
+      background: #00f;
+      height: 180px;
+    }
+    .right {
+      float: right;
+      width: 150px;
+      background: #0f0;
+      height: 200px;
+    }
+    .center {
+      background: #ffffff;
+      margin-left: 110px;
+      margin-right: 160px;
+      height: 150px;
+    }
+  </style>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      function Foo() {
+        //类变量，类访问，实例不可访问，只有一份
+        Foo.a = function () {
+          console.log(1);
+        };
+        //实例变量，每个实例单独一份
+        this.a = function () {
+          console.log(2);
+        };
+      }
+      //实例变量，所有实例共享一份，位于原型对象中
+      Foo.prototype.a = function () {
+        console.log(3);
+      };
+      //类变量，与上面类变量意义相同，当类被实例化时，此类变量被覆盖
+      Foo.a = function () {
+        console.log(4);
+      };
+      console.log(Foo.prototype);
+      console.log(Foo.a);
+      Foo.a(); //4
+      let obj = new Foo();
+      console.log(Foo.prototype);
+      console.log(obj);
+      obj.a(); //2
+      Foo.a(); //1
+      obj.__proto__.a(); //3
+      Foo.prototype.a(); //3
+    </script>
+  </body>
+</html>

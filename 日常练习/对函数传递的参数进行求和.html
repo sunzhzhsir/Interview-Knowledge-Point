@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //对函数传递的参数进行求和，闭包
+      //   var foo = function (...args) {}; //实现函数题
+      //   var f1 = foo(1, 2, 3);
+      //   f1.getVlue(); //6
+      //   var f2 = foo(1)(2, 3);
+      //   f2.getVlue(); //6
+      //   var f3 = foo(1)(2)(3);
+      //   f3.getVlue();
+
+      //闭包
+      var foo = function (...args) {
+        console.log(args);
+        var fn = function (...arguments) {
+          console.log(arguments);
+          args = [...args, ...arguments];
+          return foo(...args); //执行 foo(...args)的目的是为当前定义的fn函数（对象）添加getValue方法
+        };
+        fn.getVlue = () => {
+          return args.reduce((pre, cur) => pre + cur);
+        };
+        return fn;
+      };
+
+      var f1 = foo(1, 2, 3);
+      f1.getVlue(); //6
+      console.log(f1.getVlue());
+      var f2 = foo(1)(2, 3);
+      f2.getVlue(); //6
+      console.log(f2.getVlue());
+      //   var f3 = foo(1)(2)(3);
+      //   f3.getVlue();
+    </script>
+  </body>
+</html>

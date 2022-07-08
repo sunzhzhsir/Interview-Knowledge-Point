@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>10.curring(柯里化)函数</title>
+  </head>
+  <body>
+    <script>
+      const add = (a, b, c) => a + b + c;
+      const curring = (fn, ...args) => {
+        let allArgs = [...args];
+        const num = fn.length; //参数长度
+        const res = (...args2) => {
+          allArgs = [...allArgs, ...args2];
+          if (allArgs.length === num) {
+            return fn(...allArgs);
+          } else {
+            return res;
+          }
+        };
+        return res;
+      };
+      const a = curring(add, 1);
+      console.log(a(2)(3)); //1+2+3 = 6
+    </script>
+  </body>
+</html>

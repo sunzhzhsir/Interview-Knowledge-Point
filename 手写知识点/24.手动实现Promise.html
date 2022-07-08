@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>手动实现Promise</title>
+  </head>
+  <body>
+    <script>
+      //示例一：
+      let p1 = new Promise((resolve, reject) => {
+        resolve("成功");
+        reject("失败");
+      });
+      console.log("p1", p1);
+      /**
+       * Promise
+         [[Prototype]]: Promise
+         [[PromiseState]]: "fulfilled"
+         [[PromiseResult]]: "成功"
+      */
+      let p2 = new Promise((resolve, reject) => {
+        reject("失败");
+        resolve("成功");
+      });
+      console.log("p2", p2);
+      /**
+       * Promise
+         [[Prototype]]: Promise
+         [[PromiseState]]: "rejected"
+         [[PromiseResult]]: "失败"
+      */
+      let p3 = new Promise((resolve, reject) => {
+        throw "报错";
+      });
+      console.log("p3", p3);
+      /**
+       * Promise
+         [[Prototype]]: Promise
+         [[PromiseState]]: "rejected"
+         [[PromiseResult]]: "报错"
+      */
+      /**
+       * 总结：
+       * 1.执行了resolve，Promise状态会变成fulfilled，
+       * 2.执行了reject，Promise状态会变成rejected，
+       * 3.Promise只以第一次为准，第一次成功就永久为fulfilled,第一次失败就永远状态为rejected，
+       * 4.Promise中有throw的话，相当于执行了reject
+       *
+       */
+      //示例二：
+      //马上输出 "成功"
+      const p4 = new Promise((resolve, reject) => {
+        resolve("成功");
+      }).then(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+      //1秒后输出 "失败"
+      const p5 = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          reject("失败");
+        }, 1000);
+      }).then(
+        (res) => console.log(res),
+        (err) => console.log(err)
+      );
+      //链式调用 输出 200
+      const p6 = new Promise((resolve, reject) => {
+        resolve(100);
+      })
+        .then(
+          (res) => 2 * res,
+          (err) => console.log(err)
+        )
+        .then(
+          (res) => console.log(res),
+          (err) => console.log(err)
+        );
+      /**
+       * 总结：
+       * then接收两个回调，一个是成功回调，一个是失败回调
+       * 当Promise状态为fulfilled执行成功回调，为rejected执行失败回调
+       * 如resolve或reject在定时器里，则定时器结束后再执行then
+       * then支持链式调用，下一次then执行受上一次then返回值的影响
+       *
+       */
+      //第一步：实现resolve,reject
+      //第二步：实现then
+      class MyPromise {
+        constructor(executor) {
+          //初始化值
+          this.initValue();
+          //初始化this指向
+          this.initBind();
+          //执行传进来的函数
+          try {
+            executor(this.resolve, this.reject);
+          } catch (error) {
+            this.reject(error);
+          }
+        }
+        initValue() {
+          this.PromiseResult = null; //终值
+          this.PromiseState = "pending"; //状态，初始状态为pending
+        }
+        initBind() {
+          //初始化this,为了resolve和reject的this指向永远指向当前的MyPromise实例
+          this.resolve = this.resolve.bind(this);
+          this.reject = this.reject.bind(this);
+        }
+        resolve(value) {
+          //state是不可变的
+          if (this.PromiseState !== "pending") return;
+          //如果指向resolve，状态变为fulfilled
+          this.PromiseState = "fulfilled";
+          //终值为传进来的值
+          this.PromiseResult = value;
+        }
+        reject(reason) {
+          //state是不可变的
+          if (this.PromiseState !== "pending") return;
+          //如果指向resolve，状态变为fulfilled
+          this.PromiseState = "rejected";
+          //终值为传进来的值
+          this.PromiseResult = reason;
+        }
+        then(onFulfilled, onRejected) {
+          //接收两个回调函数，onFulfilled,onRejected
+
+          //参数校验，确保一定是函数
+          onFulfilled =
+            typeof onFulfilled === "function" ? onFulfilled : (val) => val;
+          onRejected =
+            typeof onRejected === "function"
+              ? onRejected
+              : (reason) => {
+                  throw reason;
+                };
+
+          if (this.PromiseState === "fulfilled") {
+            onFulfilled(this.PromiseResult);
+          } else if (this.PromiseState === "rejected") {
+            onRejected(this.PromiseResult);
+          }
+        }
+      }
+      const test = new MyPromise((resolve, reject) => {
+        resolve("成功!!");
+      }).then(
+        (res) => console.log(res),
+        (err) => {
+          console.log(err);
+        }
+      );
+    </script>
+  </body>
+</html>

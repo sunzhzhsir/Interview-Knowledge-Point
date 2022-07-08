@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>深拷贝</title>
+  </head>
+  <body>
+    <script>
+      //对象类型列表
+      const tagMap = {
+        mapTag: "[object Map]",
+        setTag: "[object Set]",
+        arrayTag: "[object Array]",
+        objectTag: "[object Object]",
+        symbolTag: "[object Symbol]",
+        regexpTag: "[object RegExp]",
+      };
+      const checkType = (target) => {
+        return Object.prototype.toString.call(target);
+      };
+      const checkTemp = (target) => {
+        const c = target.constructor;
+        return new c();
+      };
+      const cloneSymbol = (target) => {
+        return Object(Symbol.prototype.valueOf.call(target));
+      };
+      const cloneReg = (target) => {
+        const reFlags = /\w*$/;
+        const result = new target.constructor(
+          target.source,
+          reFlags.exec(target)
+        );
+        result.lastIndex = target.lastIndex;
+        return result;
+      };
+
+      const deepClone = (target, map = new Map()) => {
+        const type = checkType(target); //获取类型
+        if (!Object.values(tagMap).includes(type)) {
+          return target;
+        }
+        if (type === tagMap.symbolTag) {
+          return cloneSymbol(target);
+        }
+        if (type === tagMap.regexpTag) {
+          return cloneReg(target);
+        }
+        const temp = checkTemp(target); //new一个新对象，类型与原对象一致，因为使用的构造函数一致，用于存放拷贝后值
+        if (map.get(target)) {
+          return map.get(target);
+        }
+
+        map.set(target, temp);
+        if (type === tagMap.setTag) {
+          target.forEach((value) => {
+            temp.add(deepClone(value, map));
+          });
+        }
+        if (type === tagMap.mapTag) {
+          target.forEach((value, key) => {
+            temp.set(key, deepClone(value, map));
+          });
+        }
+        for (const key in target) {
+          temp[key] = deepClone(target[key], map);
+        }
+        return temp;
+      };
+      const test = {
+        name: "tom",
+        age: "18",
+        c: {
+          a: "A",
+          b: "B",
+        },
+      };
+      console.log(deepClone(test));
+
+      console.log(JSON.parse(JSON.stringify(test)));
+    </script>
+  </body>
+</html>

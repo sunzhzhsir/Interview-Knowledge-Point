@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>2.实现new的过程</title>
+  </head>
+  <body>
+    <script>
+      function c(test) {
+        this.test = test;
+        this.c = function () {
+          console.log(c);
+        };
+      }
+      function myNew(fn, ...args) {
+        const obj = {};
+        obj.__proto__ = fn.prototype;
+        fn.apply(obj, args);
+        return obj;
+      }
+      console.log(myNew(c, "asd"));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      const arry = [1, 3, 2];
+      const sumFn = (...args) => {
+        return args.reduce((pre, cur) => {
+          return pre + cur;
+        });
+      };
+      var currying = function (func) {
+        const args = [];
+        return function fn(...rest) {
+          if (rest.length === 0) {
+            return func(...args);
+          } else {
+            args.push(...rest);
+            return fn;
+          }
+        };
+      };
+      currying(sumFn)(1)(2)(3)();
+      console.log(currying(sumFn)(1)(2)(3)());
+      currying(sumFn)(1)(2)(3, 4)(5)();
+      console.log(currying(sumFn)(1)(2)(3, 4)(5)());
+    </script>
+  </body>
+</html>

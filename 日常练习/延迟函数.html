@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 实现一个sleep函数，比如sleep(1000)，等待1000毫秒
+       */
+      function sleep(time) {
+        return new Promise((resolve, reject) => {
+          setTimeout(resolve, time);
+        });
+      }
+      const target = function () {
+        console.log("一秒后执行");
+      };
+      sleep(1000).then(() => {
+        target();
+      });
+    </script>
+  </body>
+</html>

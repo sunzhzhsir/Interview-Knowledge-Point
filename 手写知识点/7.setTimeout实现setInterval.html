@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>7.setTimeout实现setInterval</title>
+  </head>
+  <body>
+    <script>
+      const mySetInterval = (fn, delay = 200) => {
+        let timer = null;
+        const interval = () => {
+          timer = setTimeout(() => {
+            fn(), interval();
+          }, delay);
+        };
+        interval();
+        return {
+          cancel: () => {
+            clearTimeout(timer);
+          },
+        };
+      };
+      let i = 0;
+      function fnc() {
+        console.log("定时器", i++);
+      }
+      const test = mySetInterval(fnc, 2000);
+    </script>
+  </body>
+</html>

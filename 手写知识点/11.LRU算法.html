@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>11.LRU算法</title>
+  </head>
+  <body>
+    <script>
+      /**
+       * 设计实现一个LRU（最近最少使用）缓存机制，它应该支持一下操作：获取数据get和写入数据put。
+       * 获取数据get(key)，如果密钥key存在于缓存中，则获取密钥值（总是整数），否则返回-1.
+       * 写入数据put(key,value)，如果密要已存在则变更其数据值，如果密钥不存在则插入该组（密钥/数据值）
+       * 当缓存达到上限时，它应该写入新数据之前删除最久未使用的数据值，从而为新的插入留出空间
+       * 示例;
+       * LRUCache cache = new LRUCache(2)  参数是缓存容量
+       * cache.put(1,1);存入
+       * cache.put(2,2);存入
+       * cache.get(1);取出key为1的值
+       * cache.put(3,3); 清除key为2的值，存入3/3对。
+       * cache.get(2);返回-1，
+       * cache.put(4,4); 清除key为1的值，存入4/4对。
+       * cache.get(1);返回-1，
+       * cache.get(3);返回3
+       * cache.get(4);返回4
+       *
+       */
+
+      class LRUCache {
+        constructor(size) {
+          this.size = size;
+          this.cache = new Map();
+        }
+        get(key) {
+          const haskey = this.cache.has(key);
+          if (!haskey) {
+            return -1;
+          } else {
+            const val = this.cache.get(key);
+            this.cache.delete(key); //删除map中key值
+            this.cache.set(key, val); //重新存入
+            return val;
+          }
+        }
+        put(key, val) {
+          const haskey = this.cache.get(key);
+          if (haskey) {
+            this.cache.delete(key);
+          }
+          this.cache.set(key, val);
+          if (this.cache.size > this.size) {
+            //this.cache.keys()返回一个Iterator对象，包含了 Map 对象中每个元素的键
+            this.cache.delete(this.cache.keys().next().value);
+          }
+        }
+      }
+      const cache = new LRUCache(2);
+      cache.put(1, 1);
+      cache.put(2, 2);
+      cache.put(3, 3);
+      cache.put(4, 4);
+    </script>
+  </body>
+</html>

@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>4.防抖函数</title>
+  </head>
+  <body>
+    <button>点我</button>
+    <script>
+      document.addEventListener("click", debounce(fnc, 1000));
+      function fnc() {
+        console.log("点我");
+      }
+      //方法1
+      function debounce(fn, delay = 200) {
+        let timer;
+        return function (...args) {
+          if (timer) {
+            clearTimeout(timer);
+            timer = null;
+          }
+          timer = setTimeout(() => {
+            fn.apply(this, args);
+          }, delay);
+        };
+      }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>a==1&&a==2&&a==3</title>
+  </head>
+  <body>
+    <script>
+      //方法1
+      var a = {
+        i: 1,
+        toString: function () {
+          return a.i++;
+        },
+      };
+      console.log(a == 1 && a == 2 && a == 3);
+
+      //方法2
+      var a = [1, 2, 3];
+      a.join = a.shift;
+      console.log(a);
+      console.log(a == 1 && a == 2 && a == 3);
+
+      //方法3
+      var val = 0;
+      Object.defineProperty(window, "b", {
+        get: function () {
+          return ++val;
+        },
+      });
+      console.log(b == 1 && b == 2 && b == 3);
+    </script>
+  </body>
+</html>

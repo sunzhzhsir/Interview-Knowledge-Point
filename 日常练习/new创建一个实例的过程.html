@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>new创建一个实例的过程</title>
+  </head>
+  <body>
+    <div>new创建一个实例的过程</div>
+    <script>
+      // new创建一个实例的过程：
+      // 1.创建一个空对象
+      // 2.继承构造函数的原型
+      // 3.this指向obj,并调用构造函数
+      // 4.返回对象
+      class Test {
+        constructor(name) {
+          this.name = name;
+        }
+      }
+      const test = new Test("tom");
+      console.log("Test", test);
+
+      function Person(name, age) {
+        this.name = name;
+        this.age = age;
+        console.log(this);
+        return this;
+      }
+      function myNew(fn, ...args) {
+        // 1.创建一个空对象
+        const obj = {};
+        // 2.继承构造函数的原型
+        obj.__proto__ = fn.prototype;
+        // 3.this指向obj,并调用构造函数
+        fn.apply(obj, args);
+        // 4.返回对象
+        return obj;
+      }
+      const person = myNew(Person, "tom", 18);
+      console.log("Person", person);
+
+      const objTest = { name: "tom" };
+      console.log("objTest", objTest);
+    </script>
+  </body>
+</html>

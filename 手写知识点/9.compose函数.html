@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>9.compose函数</title>
+  </head>
+  <body>
+    <script>
+      function fn1(x) {
+        console.log(x);
+        return x + 1;
+      }
+      function fn2(x) {
+        return x + 2;
+      }
+      function fn3(x) {
+        return x + 3;
+      }
+      function fn4(x) {
+        return x + 4;
+      }
+      const compose = (...fns) => {
+        if (fns.length === 0) return (num) => num;
+        if (fns.length === 1) return fns[0];
+        return fns.reduce((pre, next) => {
+          console.log(pre);
+          console.log(next);
+          return (num) => {
+            return pre(next(num));
+          };
+        });
+      };
+      /**
+       * 第一次reduce回调执行后：
+       * 本次pre=fn1,next=fn2
+       * (num)=>{                          (num)=>{
+       *    return pre(next(num))     ->      return fn1(fn2(num))    (箭头函数暂名为fnc)
+       * }                                 }
+       *
+       * fn1(fn2(num));
+       * 第二次reduce回调执行后：
+       * 本次pre=fnc,next=fn3
+       * (num)=>{                          (num)=>{
+       *    return pre(next(num))     ->      return fnc(fn3(num))
+       * }                                 }
+       *
+       * fn1(fn2(fn3(num)));
+       *
+       * 最终a 等于
+       *
+       * (num)=>{
+       *     return fn1(fn2(fn3(num)))
+       * }
+       *
+       */
+      const a = compose(fn1, fn2, fn3);
+      console.log(a(1));
+    </script>
+  </body>
+</html>
