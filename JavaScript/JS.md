@@ -1,3 +1,7 @@
+[手写 Promise 原理，最通俗易懂的版本](https://mp.weixin.qq.com/s/w5RF1LKkX1F77CQQgR4pnA)
+[带你复习 50 个 JavaScript「基础」知识点](https://mp.weixin.qq.com/s/-VLnevAo5jay_8t_9vvWhg)
+[复习 50 个 JavaScript「进阶」知识点](https://mp.weixin.qq.com/s/sSbDY0qDXoBF95QBMgzJsA)
+
 #### 一、闭包
 
 一个函数和其周围状态（lexical environment，词法环境）的引用捆绑在一起（或者说函数被引用包围），这样的组合就是闭包（closure）。也就是说，闭包让你可以在一个内层函数中访问到其外层函数的作用域。在 JavaScript 中，每当创建一个函数，闭包就会在函数创建的同时被创建出来。
@@ -387,7 +391,6 @@ for (let value of t) {
 
 ```
 for in 的特点：
-结合上面的两个例子,分析得出:
 for ... in 循环返回的值都是数据结构的 键值名。
 遍历对象返回的对象的 key 值,遍历数组返回的数组的下标(key)。
 for ... in 循环不仅可以遍历数字键名,还会遍历原型上的值和手动添加的其他键。特别情况下, for ... in 循环会以任意的顺序遍历键名
@@ -407,3 +410,79 @@ arguments 对象
 Nodelist 对象, 就是获取的 dom 列表集合
 以上这些都可以直接使用 for of 循环。 凡是部署了 iterator 接口的数据结构也都可以使用数组的 扩展运算符(...)、和解构赋值等操作。
 ```
+
+#### 十八、null 和 undefined 的异同点有哪些？
+
+```
+相同点
+1、都是空类型
+2、转布尔值都是 false，都是假值
+3、null == undefined 为 true
+不同点
+1、typeof，前者为 object，后者为 undefined
+2、null 转数字为 0，undefined 转数字为 NaN
+3、null === undefined 为 false
+```
+
+#### 十九、绑定点击事件有几种方式？
+
+```
+三种
+xxx.onclick = function (){}
+<xxx onclick=""></xxx>
+xxx.addEventListener('click', function(){}, false)
+```
+
+#### 二十、什么是事件委托？
+
+```
+当子元素都需要绑定相同事件时，可以将事件绑在父元素上，优点有：
+绑定在父元素，则只需绑定一次，节省性能
+后续新增的子元素也可以触发父元素绑定的事件
+```
+
+#### 二十一、JavaScript 有几种数据类型？
+
+number：数字类型
+string：字符串类型
+boolean：布尔值类型
+undefined：未定义类型
+null：空类型
+object：对象类型
+symbol：symbol 类型
+bigint：大数字类型
+
+#### 二十二、undeclared 与 undefined 的区别？
+
+undefined：声明了变量，但是没有赋值
+undecalared：没有声明变量就直接使用
+var a; //undefined
+b; // b is not defined
+
+#### 二十三、let & const 与 var 的区别？
+
+- 1、var 存在变量提升，可重复声明同一变量，声明的变量均可改
+- 2、let 没有变量提升，不可重复声明同一变量，声明的变量均可改
+- 3、const 没有变量提升，不可重复声明同一变量，声明的基本数据类型不可改，引用类型可改属性，不可只声明变量而不赋值
+
+#### 二十四、Object.defineProperty(target, key, options)，options 可传什么参数？
+
+value：给 target[key]设置初始值
+get：调用 target[key]时触发
+set：设置 target[key]时触发
+writable：默认 false，为 true 时此属性才能被赋值运算符修改
+enumerable：默认 false，为 true 时此属性才能被枚举
+configurable：默认为 false，为 true 时此属性的描述符才能被修改，才能被删除
+
+#### 二十五、箭头函数与普通函数的区别？
+
+1、箭头函数不能作为构造函数，不能 new
+2、箭头函数没有自己的 this
+3、箭头函数没有 arguments 对象
+4、箭头函数没有原型对象
+
+#### 二十六、Commonjs 和 ES6 Module 的区别？
+
+1、前者是拷贝输出，后者是引用输出
+2、前者可修改引入值，后者只读
+3、前者是运行时，后者是编译时
