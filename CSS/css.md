@@ -467,3 +467,19 @@ animation 可以出发多次，transition 只能触发一次
 animation 可以设置多个帧，而 transition 只有两帧
 前者可能会引起多次重回回流，后者会比较少
 ```
+
+#### 十三、自适应的单位有哪些
+
+1. %
+2. vw (相对于视口宽度)
+3. vh
+4. vm (相对于视口宽度或者高度，取决于哪个小)
+5. em (相对于父元素字体大小的单位)
+6. rem (相对于根元素字体大小的单位)
+
+#### 十四、CSS 的盒子模型由哪几个部分组成？
+
+1、content-box(标准盒模型)
+padding 和 border 不被包含在 width 和 height 内，元素的实际大小为宽高+padding+border，此为标准模式下的盒模型；
+2、border-box(怪异盒模型)
+padding 和 border 被包含在 width 和 height 内，元素的实际大小为你定义了多宽就是多宽，此为怪异模式下的盒模型
