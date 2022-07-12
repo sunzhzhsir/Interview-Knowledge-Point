@@ -751,3 +751,18 @@ promise 的一些问题：
 1、一旦执行，无法中途取消，链式调用多个 then 中间不能随便跳出来；
 2、错误无法在外部被捕捉到，只能在内部进行预判处理，如果不设置回调函数，promise 内部抛出的错误，不会反馈到外部；
 3、promise 内部调用如何进行，检测起来很难，当处于 pending 状态时，无法得知目前进展到哪一个阶段（刚刚开始还是即将结束）。
+
+#### 三十、判断数组的几种方式？
+
+```js
+// 1、通过原型链判断：
+obj.__proto__ === Array.prototype;
+// 2、通过ES6的Array.isArray()做判断
+Array.isArray(obj);
+// 3、通过instanceof做判断
+obj instanceof Array;
+// 4、通过Array.prototype.isPrototypeOf
+Array.prototype.isPrototypeOf(obj);
+// 5、通过Object.prototype.toString.call()做判断
+Object.prototype.toString.call(obj).slice(8, -1) === "Array";
+```

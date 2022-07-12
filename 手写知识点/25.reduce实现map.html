@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>reduce实现map</title>
+  </head>
+  <body>
+    <script>
+      Array.prototype.mMap = function (fn) {
+        let result = [];
+        this.reduce((pre, next, index, arr) => {
+          result.push(fn.call(this, next));
+          return next;
+        }, 0);
+        return result;
+      };
+      let testArray = [2, 3, 4, 5];
+      let a = testArray.map((item) => {
+        return item * item;
+      });
+      console.log("aaaaaa:", a);
+      let b = testArray.mMap((item) => {
+        return item * item;
+      });
+      console.log("bbbbbb:", b);
+    </script>
+  </body>
+</html>
