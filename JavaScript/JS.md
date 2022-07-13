@@ -766,3 +766,21 @@ Array.prototype.isPrototypeOf(obj);
 // 5、通过Object.prototype.toString.call()做判断
 Object.prototype.toString.call(obj).slice(8, -1) === "Array";
 ```
+
+#### 三十一、JavaScript Event Loop 原理？
+
+在 js 的运行机制中，主要把任务分为同步任务和异步任务，其中异步任务又分为宏任务和微任务。js 运行时分为主线程和调用栈（执行栈），所有的同步任务都会放到调用栈中按照顺序等待主线程依次执行，而异步任务会在异步任务得到结果后，将注册的回调函数放到异步任务队列中等待主线程空闲时（执行栈被清空）通知调用。将先进入的异步任务放置执行栈中执行。在执行完成之后，在任务队列中删除任务。此时的任务称之为宏任务。当执行栈把某个宏任务执行完成之后，会去通知微任务队列执行，直到清空微任务队列中的微任务再进行下一次循环。
+宏任务：所有 js 代码,setTimeout,setInterval,setImmediate,I/O,UIRendering;
+微任务：promise 的 then,catch,finaly,process.nextTick,MutationObserver(监测 dom 的变更);
+延申：
+有关 async 和 await 的执行顺序：async/await 在底层转换成了 promise 和 then 回调函数。也就是说，这是 promise 的语法糖。每次我们使用 await，解释器都会创建一个 promise 对象，然后把剩下的 async 函数中的操作放到 then 回调函数中。
+
+#### 三十二、typeof 和 instanceof 的区别？
+
+typeof：判断基本数据类型，返回的结果是用字符串来说明数据类型；
+instanceof：判断引用数据类型，返回结果是布尔值，也可判断这个变量是否为某个函数的实例，它检测的是对象的原型；
+typeof 需要注意：
+判断引用数据类型：Object,Array,null 判断结果都是 Object；判断 function 返回的还是 function；判断正则表达式返回的结果是 Object；判断 NaN 返回 number。
+
+instanceof 需要注意：
+它不可以判断基本数据类型；它可以判断 Object 对象数据是否为数组或对象，但判断数组类型的数据类型不论是 Array 还是 Obejct 结果都是 true。

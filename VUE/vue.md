@@ -5,6 +5,7 @@
 [剖析 Vue 原理&实现双向绑定 MVVM](https://segmentfault.com/a/1190000006599500)
 [一文搞定常考 Vuex 常考的知识点](https://mp.weixin.qq.com/s/S7r3H2mvtFAxoJovk-oA5A)
 [一文搞定常考 Vue-router 知识点](https://mp.weixin.qq.com/s/bp2LebO1yO8_VmRW4kMD9w)
+[VUE 干货分享](https://m.zhipin.com/mpa/html/get/column?contentId=9b2b571e4263412dqxB50tq_&identity=0&userId=121667415)
 
 #### 一、Vue 组件间的参数传递方式？
 
