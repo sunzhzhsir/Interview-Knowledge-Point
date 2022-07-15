@@ -322,31 +322,26 @@ js 的垃圾回收机制是为了防止内存泄漏（已经不需要的某一�
 
 #### 十四、Hash 和 History 路由的区别和优缺点？
 
-```
+Hash 路由模式的实现主要是基于以下几个特征：
 
-    Hash路由模式的实现主要是基于以下几个特征：
+- 1、url 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送；
+- 2、hash 值的改变，都会在浏览器的访问历史中增加一个记录。因此我们通过浏览器的回退，前进按钮控制 hash 的切换；
+- 3、可以通过 a 标签，并设置 href 属性，当用户点击这个标签后，URL 的 hash 值会发生改变；或者使用 javaScript 来对 location.hash 进行赋值，改变 url 的 hash 值；
+- 4、我们可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）。
 
-1. url 中 hash 值只是客户端的一种状态，也就是说当向服务器端发出请求时，hash 部分不会被发送；
-2. hash 值的改变，都会在浏览器的访问历史中增加一个记录。因此我们通过浏览器的回退，前进按钮控制 hash 的切换；
-3. 可以通过 a 标签，并设置 href 属性，当用户点击这个标签后，URL 的 hash 值会发生改变；或者使用 javaScript 来对 location.hash 进行赋值，改变 url 的 hash 值；
-4. 我们可以使用 hashchange 事件来监听 hash 值的变化，从而对页面进行跳转（渲染）
-   history 路由模式的实现主要基于存在下面几个特征：
-   1） pushState 和 replaceState 两个 API 来操作实现 URL 的变化；
-   2） 我们可以使用 popstate 事件来监听 url 的变化，从而对页面进行跳转（渲染）;
-   3） history.pushState()或者 history.replaceState()不会触发 popstate 事件，这是我们需要手动触发页面跳转（渲染）
+history 路由模式的实现主要基于存在下面几个特征：
 
-```
+- 1、pushState 和 replaceState 两个 API 来操作实现 URL 的变化；
+- 2、我们可以使用 popstate 事件来监听 url 的变化，从而对页面进行跳转（渲染）;
+- 3、history.pushState()或者 history.replaceState()不会触发 popstate 事件，这是我们需要手动触发页面跳转（渲染）
 
 #### 十五、Symbol 有了解吗？
 
-```
-Symbol
-是 ES6 的特性，具体使用场景有：
+Symbol 是 ES6 的特性，具体使用场景有：
 
-充当对象的属性名，实现私有属性
-充当变量，实现单独变量
-用来定义类里的私有属性
-```
+- 1.充当对象的属性名，实现私有属性；
+- 2.充当变量，实现单独变量;
+- 3.用来定义类里的私有属性；
 
 #### 十六、迭代器有了解吗，哪些是可迭代的
 
@@ -401,12 +396,7 @@ for of 不同与 forEach, 它可以与 break、continue 和 return 配合使用,
 提供了遍历所有数据结构的统一接口
 哪些数据结构部署了 Symbol.iteratoer 属性了呢?
 只要有 iterator 接口的数据结构,都可以使用 for of 循环。
-数组 Array
-Map
-Set
-String
-arguments 对象
-Nodelist 对象, 就是获取的 dom 列表集合
+数组 Array、Map、Set、String、arguments 对象、Nodelist 对象, 就是获取的 dom 列表集合
 以上这些都可以直接使用 for of 循环。 凡是部署了 iterator 接口的数据结构也都可以使用数组的 扩展运算符(...)、和解构赋值等操作。
 ```
 
@@ -589,7 +579,7 @@ function getJSON(url) {
 
 在发起请求前，我们可以为这个对象添加一些信息和监听函数。比如说我们可以通过 setRequestHeader 方法来为请求添加头信息。我们还可以为这个对象添加一个状态监听函数。一个 XMLHttpRequest 对象一共有 5 个状态，当它的状态变化时会触发onreadystatechange 事件，我们可以通过设置监听函数，来处理请求成功后的结果。当对象的 readyState 变为 4 的时候，代表服务器返回的数据接收完成，这个时候我们可以通过判断请求的状态，如果状态是 2xx 或者 304 的话则代表返回正常。这个时候我们就可以通过 response 中的数据来对页面进行更新了。
 
-当对象的属性和监听函数设置完成后，最后我们调用 sent 方法来向服务器发起请求，可以传入参数作为发送的数据体。
+当对象的属性和监听函数设置完成后，最后我们调用 send 方法来向服务器发起请求，可以传入参数作为发送的数据体。
 ```
 
 详细资料可以参考：

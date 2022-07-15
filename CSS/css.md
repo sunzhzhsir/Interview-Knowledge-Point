@@ -158,7 +158,7 @@ div {
   content: "";
   display: inline-block;
   height: 100%;
-  vertical-align: middle;
+  vertical-align: middle; /* 设置元素的垂直对齐方式,middle:把此元素放置在父元素的中部 */
 }
 
 .box {
@@ -201,6 +201,7 @@ inline-block 默认宽度为内容宽度，可以设置宽高，同行显示。
 list-item	像块类型元素一样显示，并添加样式列表标记。
 table	此元素会作为块级表格来显示。
 inherit	规定应该从父元素继承display属性的值。
+flex    定义弹性盒子。
 ```
 
 #### 五、position 的值 relative 和 absolute 定位原点是？
@@ -416,9 +417,9 @@ BFC指的是块级格式化上下文，一个元素形成了BFC之后，那么�
 
 清除浮动的方式
 
-（1）使用clear属性清除浮动。参考28。
+（1）使用clear属性清除浮动。
 
-（2）使用BFC块级格式化上下文来清除浮动。参考26。
+（2）使用BFC块级格式化上下文来清除浮动。
 
 因为BFC元素不会影响外部元素的特点，所以BFC元素也可以用来清除浮动的影响，因为如果不清除，子元素浮动则父元素高度塌陷，必然会影响后面元素布局和定位，这显然有违BFC元素的子元素不会影响外部元素的设定。
 ```
