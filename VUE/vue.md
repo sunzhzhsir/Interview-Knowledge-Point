@@ -167,9 +167,9 @@ v-else 必须和v-if连用 不能单独使用 否则报错 模板编译错误
 v-text 解析文本
 v-html 解析html标签
 v-bind:class 三种绑定方法
-对象型 ‘{red:isred}’
-三元型 ‘isred?“red”:“blue”’
-数组型 ‘[{red:“isred”},{blue:“isblue”}]’
+对象型 '{red:isred}'
+三元型 'isred?"red":"blue"'
+数组型 '[{red:"isred"},{blue:"isblue"}]'
 v-once 进入页面时 只渲染一次 不在进行渲染
 v-cloak 防止闪烁
 v-pre 把标签内部的元素原位输出

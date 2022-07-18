@@ -196,3 +196,39 @@
 - 2、html 和 css 可以进行同步解析渲染，link 中的 css 不会阻塞页面，且还可以让页面逐步呈现
 - 3、link 放在 head 中，可以有效防止空白页面或者没有无样式内容闪烁的问题出现，提高用户体验
 - 4、如果放在底部，那么页面 dom 渲染后还要重新根据 css 进行重绘
+
+#### 十三、Cookie 和 Session 的区别：
+
+1、cookie 数据由服务端生成发送存放在客户的浏览器上，session 数据放在服务器上。
+
+2、cookie 不是很安全，别人可以分析存放在本地的 cookie 并进行 cookie 欺骗,考虑到安全应当使用 session。
+
+3、session 会在一定时间内保存在服务器上。当访问增多，会比较占用你服务器的性能,考虑到减轻服务器性能方面，应当使用 cookie。
+
+4、数据格式是键值对，单个 cookie 保存的数据不能超过 4K，很多浏览器都限制一个站点最多保存 20 个 cookie。
+
+5、cookie 数据过期机制是设置 expire 值
+
+6、所以个人建议：
+
+将登陆信息等重要信息存放为 session
+
+其他信息如果需要保留，可以放在 cookie 中
+
+cookie 有很多使用场景，在项目中比较常见的有：
+
+1.登录记住用户名
+
+2.记录用户浏览记录
+
+#### 十四、Token 和 Session 的区别：
+
+session 和 token 并不矛盾，作为身份认证 token 安全性比 session 好，因为每个请求都有签名还能防止监听以及重放攻击，而 session 就必须靠链路层来保障通讯安全了。如上所说，如果你需要实现有状态的会话，仍然可以增加 session 来在服务器端保存一些状态
+
+App 通常用 restful api 跟 server 打交道。Rest 是 stateless 的，也就是 app 不需要像 browser 那样用 cookie 来保存 session,因此用 session token 来标示自己就够了，session/state 由 api server 的逻辑处理。如果你的后端不是 stateless 的 rest api,那么你可能需要在 app 里保存 session.可以在 app 里嵌入 webkit,用一个隐藏的 browser 来管理 cookie session.
+
+Session 是一种 HTTP 存储机制，目的是为无状态的 HTTP 提供的持久机制。所谓 Session 认证只是简单的把 User 信息存储到 Session 里，因为 SID 的不可预测性，暂且认为是安全的。这是一种认证手段。而 Token，如果指的是 OAuth Token 或类似的机制的话，提供的是 认证 和 授权 ，认证是针对用户，授权是针对 App。其目的是让 某 App 有权利访问 某用户 的信息。这里的 Token 是唯一的。不可以转移到其它 App 上，也不可以转到其它 用户 上。转过来说 Session。Session 只提供一种简单的认证，即有此 SID，即认为有此 User 的全部权利。是需要严格保密的，这个数据应该只保存在站方，不应该共享给其它网站或者第三方 App。所以简单来说，如果你的用户数据可能需要和第三方共享，或者允许第三方调用 API 接口，用 Token。如果永远只是自己的网站，自己的 App，用什么就无所谓了。
+
+token 就是令牌，比如你授权（登录）一个程序时，他就是个依据，判断你是否已经授权该软件；cookie 就是写在客户端的一个 txt 文件，里面包括你登录信息之类的，这样你下次在登录某个网站，就会自动调用 cookie 自动登录用户名；session 和 cookie 差不多，只是 session 是写在服务器端的文件，也需要在客户端写入 cookie 文件，但是文件里是你的浏览器编号.Session 的状态是存储在服务器端，客户端只有 session id；而 Token 的状态是存储在客户端。
+
+Cookie 保存在客户端浏览器中，而 Session 保存在服务器上。 如果说 Cookie 机制是通过检查客户身上的“通行证”来确定客户身份的话，那么 Session 机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session 相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了
