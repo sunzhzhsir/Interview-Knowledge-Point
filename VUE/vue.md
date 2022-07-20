@@ -335,7 +335,7 @@ router.go：传正数向前跳转，传负数向后跳转
 activated：页面第一次进入的时候，钩子触发顺序是 created->mounted->activated
 deactivated：页面退出的时侯会触发 deactivated,当再次前进或者后退的时候只触发 activated
 
-#### 二十五父组件和子组件生命周期钩子执行顺序是什么？
+#### 二十五、父组件和子组件生命周期钩子执行顺序是什么？
 
 加载渲染过程：
 父 beforeCreate -> 父 created -> 父 beforeMount -> 子 beforeCreate -> 子 created -> 子 beforeMount -> 子 mounted -> 父 mounted
@@ -345,3 +345,22 @@ deactivated：页面退出的时侯会触发 deactivated,当再次前进或者�
 父 beforeUpdate -> 父 updated
 销毁过程：
 父 beforeDestroy -> 子 beforeDestroy -> 子 destroyed -> 父 destroyed
+
+#### 二十六、首屏加载空白的解决方案？
+
+单页面应用的 html 是靠 js 生成，因为首屏需要加载很大的 js 文件(app.js vendor.js)，所以当网速差的时候会产生一定程度的白屏。
+解决办法：
+优化 webpack 减少模块打包体积，code-split 按需加载服务端渲染；
+在服务端事先拼装好首页所需的 html ；
+首页加 loading 或 骨架屏 （仅仅是优化体验）；
+服务端开启 gzip 压缩；
+打包文件分包，提取公共文件包；
+
+#### 二十七、mvvm 和 mvc 的区别
+
+MVVM 即 Model-View-ViewModel 的简写。即模型-视图-视图模型。模型（Model）指的是后端传递的数据。视图(View)指的是所看到的页面。视图模型(ViewModel)是 mvvm 模式的核心，它是连接 view 和 model 的桥梁。它有两个方向：一是将模型（Model）转化成视图(View)，即将后端传递的数据转化成所看到的页面。实现的方式是：数据绑定。二是将视图(View)转化成模型(Model)，即将所看到的页面转化成后端的数据。实现的方式是：DOM 事件监听。这两个方向都实现的，我们称之为数据的双向绑定。
+MVC 是 Model-View- Controller 的简写。即模型-视图-控制器。M 和 V 指的意思和 MVVM 中的 M 和 V 意思一样。C 即 Controller 指的是页面业务逻辑。使用 MVC 的目的就是将 M 和 V 的代码分离。MVC 是单向通信。也就是 View 跟 Model，必须通过 Controller 来承上启下。MVC 和 MVVM 的区别并不是 VM 完全取代了 C，只是在 MVC 的基础上增加了一层 VM，只不过是弱化了 C 的概念，ViewModel 存在目的在于抽离 Controller 中展示的业务逻辑，而不是替代 Controller，其它视图操作业务等还是应该放在 Controller 中实现。也就是说 MVVM 实现的是业务逻辑组件的重用，使开发更高效，结构更清晰，增加代码的复用性。
+
+#### 二十八、eventbus 事件中兄弟组件传值原理
+
+概念 EventBus 是消息传递的一种方式，基于一个消息中心，订阅和发布消息的模式，称为发布订阅者模式。on('name', fn)订阅消息，name:订阅的消息名称， fn: 订阅的消息 emit('name', args)发布消息, name:发布的消息名称 ， args：发布的消息 eventbus 应用，详情见 eventbus 使用详情介绍注：只不过在 vue 中已经替我们实现好了$emit,$on 这些方法，所以直接用的时候去 new Vue()就可以了.

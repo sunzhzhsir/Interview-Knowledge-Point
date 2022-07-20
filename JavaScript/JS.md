@@ -270,6 +270,7 @@ reduce / reduceRight(fn(prev, cur) ，defaultPrev) : 两两执行，prev 为上�
 ```
 
 详细资料可以参考：
+[js 实现图片懒加载原理](https://blog.csdn.net/w1418899532/article/details/90515969)
 [《懒加载和预加载》](https://juejin.im/post/5b0c3b53f265da09253cbed0)
 [《网页图片加载优化方案》](https://juejin.im/entry/5a73f38cf265da4e99575be3)
 [《基于用户行为的图片等资源预加载》](https://www.zhangxinxu.com/wordpress/2016/06/image-preload-based-on-user-behavior/)
