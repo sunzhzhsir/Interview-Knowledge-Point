@@ -476,6 +476,8 @@ configurable：默认为 false，为 true 时此属性的描述符才能被修�
 1、前者是拷贝输出，后者是引用输出
 2、前者可修改引入值，后者只读
 3、前者是运行时，后者是编译时
+[CommonJS 模块和 ES6 模块的区别](https://blog.csdn.net/qq_27674439/article/details/99736555)
+[模块打包之 CommonJS 与 ES6 模块比较初探](https://blog.csdn.net/u011240016/article/details/101074785)
 
 #### 二十七、Ajax 是什么? 如何创建一个 Ajax？
 
