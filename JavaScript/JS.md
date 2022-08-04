@@ -776,3 +776,32 @@ typeof 需要注意：
 
 instanceof 需要注意：
 它不可以判断基本数据类型；它可以判断 Object 对象数据是否为数组或对象，但判断数组类型的数据类型不论是 Array 还是 Obejct 结果都是 true。
+
+#### 三十三、Set 与 Array 的区别是什么？
+
+Set 使用 has 判断有无元素，数组使用索引
+Set 添加元素使用方法 add，数组用 push、unshift
+Set 长度为 size，数组为 length
+Set 会自动把同样的基础数据类型去重，数组不能
+Set 删除元素用 delete，数组用 splice、pop、shift
+Set 可以使用 clear 清空，数组需要重新赋值[]
+数组可以传入 new Set(array)，实现数组转 Set
+Set 可以使用 keys、value 方法，转数组
+Set 自带 forEach 方法进行遍历
+
+#### 三十四、Map 与 Object 的区别是什么？
+
+Map 使用 set 设置属性，对象使用 obj[key] = value
+Map 使用 get 获取属性值，对象使用 obj[key]
+Map 使用 has 判断属性存在与否，对象只能 obj[key]
+Map 删除元素使用 delete 方法，对象使用 delete 关键字
+Map 使用 clear 进行情空，对象需要重新赋值{}
+Map 和对象都可以使用 entries 方法转数组键值对
+Map 自带 forEach 方法进行遍历
+
+#### 三十五、NaN 是什么？有什么特点？
+
+typeof NaN 为 number
+NaN 不等于自身，不大于自身，不小于自身
+NaN 可以使用 Number.isNaN 判断
+NaN 是假值，转布尔值为 false
