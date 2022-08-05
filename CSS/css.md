@@ -317,7 +317,7 @@ flex布局是CSS3新增的一种布局方式，我们可以通过将一个元素
 
 •必须是处于常规文档流（非float和绝对定位）的块级盒子，并且处于同一个BFC当中。
 •没有线盒，没有空隙，没有padding和border将他们分隔开
-•都属于垂直方向上相邻的外边距，可以是下面任意一种情况
+•都属于垂直方向上相邻的外边距，可以是下面任意一种情况:
 •元素的margin-top与其第一个常规文档流的子元素的margin-top
 •元素的margin-bottom与其下一个常规文档流的兄弟元素的margin-top
 •height为auto的元素的margin-bottom与其最后一个常规文档流的子元素的margin-bottom
