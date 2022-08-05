@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      var threeSum = function (nums) {
+        nums = nums.sort((a, b) => a - b);
+        if (nums.length < 3) {
+          return [];
+        }
+        let res = [];
+        let sumSet = new Set();
+        for (let i = 1; i < nums.length - 1; i++) {
+          for (let j = 0; j < i; j++) {
+            var z = 0 - nums[j] - nums[i];
+            var zIndex = nums.indexOf(z, i + 1);
+            if (zIndex !== -1) {
+              var sumString = "" + nums[j] + nums[i] + nums[zIndex];
+              console.log(sumString);
+              if (!sumSet.has(sumString)) {
+                var sumArry = [nums[j], nums[i], nums[zIndex]];
+                sumSet.add(sumString);
+                res.push(sumArry);
+              }
+            }
+          }
+        }
+        return res;
+      };
+      let nums = [-1, 0, 1, 2, -1, -4];
+      console.log(threeSum(nums));
+    </script>
+  </body>
+</html>
