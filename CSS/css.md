@@ -64,7 +64,7 @@ div {
 .container {
   background: rgba(0, 0, 0, 0.5);
   text-align: center;
-  font-size: 0;
+  font-size: 10;
 }
 
 .box {
