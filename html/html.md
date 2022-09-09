@@ -234,6 +234,7 @@ token 就是令牌，比如你授权（登录）一个程序时，他就是个�
 Cookie 保存在客户端浏览器中，而 Session 保存在服务器上。 如果说 Cookie 机制是通过检查客户身上的“通行证”来确定客户身份的话，那么 Session 机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session 相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案表就可以了
 
 [彻底搞懂 Token、Session 和 Cookie](https://www.cnblogs.com/chenxiaomeng/p/14236525.html)
+[JSON Web Token 入门教程](http://www.ruanyifeng.com/blog/2018/07/json_web_token-tutorial.html)
 
 #### 十五、img 标签的 title 和 alt 属性有什么区别
 
