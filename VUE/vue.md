@@ -7,6 +7,8 @@
 [一文搞定常考 Vue-router 知识点](https://mp.weixin.qq.com/s/bp2LebO1yO8_VmRW4kMD9w)
 [VUE 干货分享](https://m.zhipin.com/mpa/html/get/column?contentId=9b2b571e4263412dqxB50tq_&identity=0&userId=121667415)
 
+[最全的 Vue 面试题+详解答案](https://juejin.cn/post/6961222829979697165)
+
 #### 一、Vue 组件间的参数传递方式？
 
 ```
