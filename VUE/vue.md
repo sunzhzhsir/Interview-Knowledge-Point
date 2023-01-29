@@ -8,6 +8,8 @@
 [VUE 干货分享](https://m.zhipin.com/mpa/html/get/column?contentId=9b2b571e4263412dqxB50tq_&identity=0&userId=121667415)
 
 [最全的 Vue 面试题+详解答案](https://juejin.cn/post/6961222829979697165)
+[面试知识点总结【Vue3、Vue2、Vite】篇](https://juejin.cn/post/7166446028266733581#heading-36)
+[Vue3 的响应式原理？一篇文章，八张图，三心为你解密~](https://mp.weixin.qq.com/s/2sKdC6FPjXMm8n4znrsRyw)
 
 #### 一、Vue 组件间的参数传递方式？
 
